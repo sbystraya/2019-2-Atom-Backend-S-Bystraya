@@ -1,9 +1,12 @@
+"""contains class TicTacToe which describes tic tac toe"""
 class TicTacToe():
+    """Describes tic iac toe"""
     winner_conditions = ((1, 2, 3), (4, 5, 6), (7, 8, 9),
                          (1, 4, 7), (2, 5, 8), (3, 6, 9),
                          (1, 5, 9), (3, 5, 7))
 
     def __init__(self):
+        """class constructor"""
         self.board = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
         self.score = {
             True: [],
@@ -12,21 +15,24 @@ class TicTacToe():
         self.player_flag = True
         self.rounds = 0
         self.print_board()
-        
+
     def reset(self):
+        """returns class to default state"""
         self.__init__()
 
     def print_board(self):
+        """print gameboard to terminal"""
         print('-'*9)
-        for i in range (3):
-            line='| '
-            for j in range (3):
-                line=line+str(self.board[i][j])+' '
-            line=line+'|'
+        for i in range(3):
+            line = '| '
+            for j in range(3):
+                line = line+str(self.board[i][j])+' '
+            line = line+'|'
             print(line)
         print('-'*9)
 
     def turn(self, cell):
+        """Describes one players turn"""
         marker = 'X' if self.player_flag else 'O'
         if cell.isdecimal():
             cell = int(cell)
@@ -50,12 +56,14 @@ class TicTacToe():
             return is_end
 
     def check_identity(self, cell):
+        """checks if the cell is already used"""
         for _, value in self.score.items():
             if cell in value:
                 return True
         return False
 
     def check(self):
+        """ghecking the end of the game"""
         msg = 'Player number {} won'
         for key, value in self.score.items():
             for condition in self.winner_conditions:
@@ -70,7 +78,7 @@ class TicTacToe():
             return False
 
     def game(self):
-        i = 0
+        """start of the gameplay"""
         while self.rounds <= 8:
             cell = input()
             res = self.turn(cell)
@@ -81,4 +89,4 @@ class TicTacToe():
                 print('Invalid input. Please, reenter position - ')
                 continue
             elif res:
-               return 'Game over'
+                return 'Game over'
